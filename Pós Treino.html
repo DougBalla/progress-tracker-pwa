@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checklist Pós-Treino Diário</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+    fieldset {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      background: #fff;
+    }
+    legend {
+      font-weight: bold;
+      color: #444;
+    }
+    label {
+      display: block;
+      margin: 0.5rem 0;
+    }
+    select, input[type=number] {
+      padding: 0.3rem;
+      margin-top: 0.3rem;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+    button {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Checklist Pós-Treino Diário</h1>
+
+  <form id="checklistForm">
+    <fieldset>
+      <legend>Informações do Treino</legend>
+      <label>
+        Dia da Semana:
+        <select name="dia">
+          <option value="Segunda">Segunda - Costas + Tríceps</option>
+          <option value="Terça">Terça - Ombro + Posterior + Panturrilha</option>
+          <option value="Quinta">Quinta - Peito + Bíceps + Antebraço</option>
+          <option value="Sexta">Sexta - Quadríceps + Panturrilha</option>
+        </select>
+      </label>
+      <label>
+        RPE médio (0-10):
+        <input type="number" name="rpe" min="0" max="10">
+      </label>
+      <label>
+        Qualidade do Sono na Noite Anterior (0-10):
+        <input type="number" name="sono" min="0" max="10">
+      </label>
+      <label>
+        Nível de Energia Antes do Treino (0-10):
+        <input type="number" name="energia" min="0" max="10">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Execução e Intensidade</legend>
+      <label><input type="checkbox" name="foco" /> Mantive foco e execução precisa?</label>
+      <label><input type="checkbox" name="falha" /> Cheguei próximo da falha muscular?</label>
+      <label><input type="checkbox" name="tecnica" /> Boa forma técnica em todos os exercícios?</label>
+      <label><input type="checkbox" name="alongamento" /> Senti bom alongamento nos exercícios?</label>
+      <label><input type="checkbox" name="pump" /> Senti pump ou inchaço muscular?</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Fadiga e Recuperação</legend>
+      <label><input type="checkbox" name="cansaco" /> Fadiga localizada (não generalizada)?</label>
+      <label><input type="checkbox" name="funcional" /> Terminei funcional, sem exaustão sistêmica?</label>
+      <label><input type="checkbox" name="proximo" /> Estou bem para treinar amanhã?</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Pós-Treino</legend>
+      <label><input type="checkbox" name="alimentacao" /> Fiz refeição ou shake adequado após o treino?</label>
+      <label><input type="checkbox" name="hidratar" /> Me hidratei adequadamente?</label>
+    </fieldset>
+
+    <button type="button" onclick="avaliarChecklist()">Avaliar Treino</button>
+  </form>
+
+  <script>
+    function avaliarChecklist() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      let marcadas = 0;
+      checkboxes.forEach(cb => {
+        if (cb.checked) marcadas++;
+      });
+
+      let feedback = '';
+      if (marcadas >= 10) {
+        feedback = '✅ Excelente dia de treino! Continue firme!';
+      } else if (marcadas >= 7) {
+        feedback = '⚠️ Treino razoável, revise pontos de recuperação e foco.';
+      } else {
+        feedback = '❌ Baixa qualidade. Reavalie sono, alimentação ou execução.';
+      }
+
+      alert(`Você marcou ${marcadas} de 12 itens.
+
+${feedback}`);
+    }
+  </script>
+</body>
+</html>
